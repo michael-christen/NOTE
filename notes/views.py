@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 
 import datetime
 
@@ -17,6 +18,7 @@ def viewBooks(request):
 def loadBook(request, val):
     return render(request, 'home.html', {'current_date': val})
 
+@csrf_exempt
 def signin(request):
     userName = None
     passWord = None
@@ -30,6 +32,7 @@ def signin(request):
 	if(user is not None):
 	   if(user.is_active):
 	       print "User is valid authenticated and verified"
+	       login(request, user)
 	   else:
 	       print "User exists, but not active"
 	else:
