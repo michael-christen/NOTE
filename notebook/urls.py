@@ -6,7 +6,14 @@ from notes import views, data
 
 urlpatterns = patterns('',
     url(r'^$', views.home),
-    url(r'^view/(\d+)/$', views.viewBook),
+    url(r'^about$', views.about),
+    url(r'^contact$', views.contact),
+    url(r'^view/$', views.viewBooks),
+    url(r'^load/(\d+)/$', views.loadBook),
+    url(r'^signin/$', views.signin),
+    url(r'^signup/$', views.signup),
+    url(r'^create/$', views.createBook),
+
     #AJAX
     url(r'^getbook/(\d+)/$', data.getBook),
     # Examples:
