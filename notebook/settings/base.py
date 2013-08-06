@@ -1,7 +1,7 @@
 import os
 # Django settings for notebook project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
