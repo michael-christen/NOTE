@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'notebook.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    '/home/michael/Projects/djangoProjs/notebook/templates',
+'/home/michael/Projects/djangoProjs/notebook/templates',
 #os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
