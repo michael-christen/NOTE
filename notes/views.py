@@ -11,12 +11,16 @@ def home(request):
     now = datetime.datetime.now()
     return render(request, 'notes/home.html', {'current_date': now})
 
-@login_required(login_url='/signin')
+@login_required(login_url='/authenticate')
 def viewBooks(request):
     return render(request, 'notes/view.html',)
     
 def loadBook(request, val):
     return render(request, 'notes/home.html', {'current_date': val})
+
+@login_required(login_url='/authenticate')
+def userInfo(request):
+    return render(request, 'notes/user.html', {'user': request.user})
 
 @csrf_exempt
 def auth(request):
@@ -50,3 +54,4 @@ def about(request):
 
 def contact(request):
     return render(request, 'notes/contact.html')
+

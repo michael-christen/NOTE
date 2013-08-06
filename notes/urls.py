@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 #url(r'^authenticate/$', views.auth),
     url(r'^authenticate/$', 'django.contrib.auth.views.login',{'template_name': 'notes/auth.html'}),
     url(r'^create/$', views.createBook),
-
+    url(r'^accounts/profile/$', views.userInfo),
     #AJAX
     url(r'^getbook/(\d+)/$', data.getBook),
     # Examples:
