@@ -127,13 +127,13 @@ DJANGO_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'notes',
 )
 
 THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'notes',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -166,9 +166,9 @@ LOGGING = {
         },
     }
 }
-here = lambda * x:os.path.join(os.path.abspath(os.path.dirname(__file__)), *x) 
+#here = lambda * x:os.path.join(os.path.abspath(os.path.dirname(__file__)), *x) 
 
-PROJECT_ROOT = here("..")
+#PROJECT_ROOT = here("..")
 # root() gives us file paths from the root of the system to whatever
 # folder(s) we pass it starting at the parent directory of the current
 # file.
