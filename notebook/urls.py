@@ -10,8 +10,8 @@ urlpatterns = patterns('',
     url(r'^contact$', views.contact),
     url(r'^view/$', views.viewBooks),
     url(r'^load/(\d+)/$', views.loadBook),
-    url(r'^signin/$', views.signin),
-    url(r'^signup/$', views.signup),
+#url(r'^authenticate/$', views.auth),
+    url(r'^authenticate/$', 'django.contrib.auth.views.login',{'template_name': 'notes/auth.html'}),
     url(r'^create/$', views.createBook),
 
     #AJAX

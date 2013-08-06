@@ -13,13 +13,13 @@ def home(request):
 
 @login_required(login_url='/signin')
 def viewBooks(request):
-    return render(request, 'view.html')
+    return render(request, 'view.html',)
     
 def loadBook(request, val):
     return render(request, 'home.html', {'current_date': val})
 
 @csrf_exempt
-def signin(request):
+def auth(request):
     userName = None
     passWord = None
 
@@ -42,9 +42,6 @@ def signin(request):
 
     return render(request, 'signin.html') 
  
-def signup(request):
-    return render(request, 'signup.html')
-
 def createBook(request):
     return render(request, 'create.html')
 

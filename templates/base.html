@@ -24,26 +24,20 @@
 		<span class="user_creds"><?=$_SESSION["logged"]?>
 		<div class="nav-collapse collapse">
 		    <ul class="nav">
-			<li class="active">
-			    <a href="/">Home</a>
-			</li>
-			<li>
-			    <a href="/about">About</a>
-			</li>
-			<li>
-			    <a href="/contact">Contact</a>
-			</li>
-			<li>
-			    <a href="/signup">Sign Up</a>
-			</li>
-			<li>
-			    <a href="/signin">Sign In</a>
-			</li>
-			<li>
+			<li {% block viewTabDescriptor %} {%endblock%}>
 			    <a href="/view">View books</a>
 			</li>
-			<li>
+			<li {% block createTabDescriptor %} {%endblock%}>
 			    <a href="/create">Create a book</a>
+			</li>
+			<li {% block aboutTabDescriptor %} {%endblock%}>
+			    <a href="/about">About</a>
+			</li>
+			<li {% block contactTabDescriptor %} {%endblock%}>
+			    <a href="/contact">Contact</a>
+			</li>
+			<li {% block authenticateTabDescriptor %} {%endblock%}>
+			    <a href="/authenticate">Sign Up / Sign In</a>
 			</li>
 		    </ul>
 		</div>
