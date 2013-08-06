@@ -9,15 +9,14 @@ import datetime
 
 def home(request):
     now = datetime.datetime.now()
-    return HttpResponse('hello')
-    return render(request, 'home.html', {'current_date': now})
+    return render(request, 'notes/home.html', {'current_date': now})
 
 @login_required(login_url='/signin')
 def viewBooks(request):
-    return render(request, 'view.html',)
+    return render(request, 'notes/view.html',)
     
 def loadBook(request, val):
-    return render(request, 'home.html', {'current_date': val})
+    return render(request, 'notes/home.html', {'current_date': val})
 
 @csrf_exempt
 def auth(request):
@@ -41,13 +40,13 @@ def auth(request):
     else:
 	print "Please sign in again"
 
-    return render(request, 'signin.html') 
+    return render(request, 'notes/signin.html') 
  
 def createBook(request):
-    return render(request, 'create.html')
+    return render(request, 'notes/create.html')
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'notes/about.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'notes/contact.html')
