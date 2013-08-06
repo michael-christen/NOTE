@@ -179,6 +179,8 @@ DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(BASE_DIR))
+BASE_DIR = os.path.dirname(os.path.abspath(BASE_DIR))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'notes/static'),)
