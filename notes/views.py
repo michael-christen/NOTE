@@ -9,6 +9,7 @@ import datetime
 
 def home(request):
     now = datetime.datetime.now()
+    return HttpResponse('hello')
     return render(request, 'home.html', {'current_date': now})
 
 @login_required(login_url='/signin')
