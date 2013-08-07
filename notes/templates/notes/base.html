@@ -20,7 +20,7 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	    </button>
-		<a class="brand" href="/">Dontyounote beta</a>
+		<a class="brand" href="/">Dontyounote <small>beta</small></a>
 		<span class="user_creds"><?=$_SESSION["logged"]?>
 		<div class="nav-collapse collapse">
 		    <ul class="nav">
@@ -36,9 +36,15 @@
 			<li {% block contactTabDescriptor %} {%endblock%}>
 			    <a href="/contact">Contact</a>
 			</li>
+			{% if user.is_authenticated %}
+			<li {% block profileTabDescriptor %} {%endblock %}> 
+				<a href='/accounts/profile'>Logged in as {{ user.username }} </a>
+			</li>
+			{% else %}
 			<li {% block authenticateTabDescriptor %} {%endblock%}>
 			    <a href="/authenticate">Sign Up / Sign In</a>
 			</li>
+			{% endif %}
 		    </ul>
 		</div>
 	    </div>
