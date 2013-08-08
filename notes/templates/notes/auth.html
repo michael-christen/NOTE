@@ -7,7 +7,7 @@
 {% endif %}
 
 <div class='container'>
-<form class='form-signup span4' method='post'>
+<form class='form-signup span4 hero-unit' method='post' action=''>
 	{% csrf_token %}
 	<h2 class='form-signup-heading'>Create an Account</h2>
 	<div class='row-fluid'>
@@ -15,39 +15,60 @@
 		<label class='span6'>Username*</label>
 	</div>
 	<div class='row-fluid'>
+		{{registerForm.email}}
+		{{registerForm.username}}
+		<!--
 		<input type='text' class='input-block-level span6' name='email' placeholder='email'>
 		<input type='text' class='input-block-level span6' name='username' placeholder='username'>
+	-->
 	</div>
 	<div class='row-fluid'>
 		<label class='span6'>Password*</label>
 		<label class='span6'>First Name</label>
 	</div>
 	<div class='row-fluid'>
+		{{registerForm.password}}
+		{{registerForm.firstName}}
+		<!--
 		<input type='password' class='input-block-level span6' name='password' placeholder='password'>
 		<input type='text' class='input-block-level span6' name='firstName' placeholder='First Name'>
+	-->
 	</div>
 	<div class='row-fluid'>
 		<label class='span6'>Confirm Password*</label>
 		<label class='span6'>Last Name</label>
 	</div>
 	<div class='row-fluid'>
+		{{registerForm.confirmedPassword}}
+		{{registerForm.lastName}}
+		<!--
 	<input type='password' class='input-block-level span6' name='confirmPassword' placeholder='Enter password again'>
 	<input type='text' class='input-block-level span6' name='lastName' placeholder='Last Name'>
+-->
 	</div>
 	<div class='row-fluid'>
-	<button class='btn btn-large btn-primary span8 offset2' type='submit' value='signUp'>Create Account</button>
+	<button class='btn btn-large btn-primary span8 offset2' type='submit' name='signUp' value='signUp'>Create Account</button>
 	</div>
 </form>
 
-<form class='form-signin span2 offset2' method='post' action="{% url 'django.contrib.auth.views.login' %}">
+{%if signinForm.errors %}
+	<p>
+		Please Correct the error {{ signinForm.erros|pluralize}} below.
+	</p>
+{% endif %}
+<form class='form-signin span2 offset2 hero-unit' method='post' action=''>
 {% csrf_token %}
    <h2 class='form-signin-heading'>Sign In</h2>
-   <input type='text' class='input-block-level' name='username' placeholder='username'>
-   <input type='password' class='input-block-level' name='password' placeholder='password'>
+   {{ signinForm.username }}
+   {{ signinForm.password }}
+<!--   
    <label class='checkbox'>
       <input type='checkbox' value='remember_me'>Remember Me</input>
    </label>
-   <button class='btn btn-large btn-primary' type='submit' value='signIn'>Sign In</button>
+-->
+   <button class='btn btn-large btn-primary' type='submit' name='signIn' value='signIn'>Sign In</button>
 </form>
 </div>
+
+
 {% endblock %}

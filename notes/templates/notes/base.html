@@ -40,6 +40,9 @@
 			<li {% block profileTabDescriptor %} {%endblock %}> 
 				<a href='/accounts/profile'>Logged in as {{ user.username }} </a>
 			</li>
+			<li>
+			    <a href="/logout">Logout</a>
+			</li>
 			{% else %}
 			<li {% block authenticateTabDescriptor %} {%endblock%}>
 			    <a href="/authenticate">Sign Up / Sign In</a>
