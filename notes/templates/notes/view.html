@@ -2,5 +2,23 @@
 {% block title %} View Books {% endblock %}
 {% block viewTabDescriptor %} class = 'active'{%endblock%}
 {% block content %}
-    Here are some books
+<div class='container'>
+	<table class='table table-bordered table-striped table-hover'>
+		<tr>
+			<th>Id</th>
+			<th>Title</th>
+			<th>Public</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Hello</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Yeah</td>
+			<td>Nope</td>
+		</tr>
+	</table>
+</div>
 {% endblock %}

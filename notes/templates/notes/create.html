@@ -2,5 +2,21 @@
 {% block title %} Create a New Book {% endblock %}
 {% block createTabDescriptor %} class = 'active' {% endblock %}
 {% block content %}
-    Please Create a book
+<div class='container'>
+	<form class='form-createBook hero-unit offset3 span6' action='' method='post'>
+		{% csrf_token %}
+		<div class='row-fluid'>
+			<label  class='span4'>Title:</label>
+			<input type='text' class='span8' name='title' id='id_title'>
+		</div>
+		<div class='row-fluid'>
+			<label  class='span4'>Public:</label>
+			<input type='checkbox' class='span2' name='public'>
+		</div>
+		<div class='row-fluid'>
+			<button class='btn btn-large btn-primary span8 offset2' type='submit' name='submit' value='submt'>Create Book</button>
+		</div>
+	</form>
+	</div>
+</div>
 {% endblock %}

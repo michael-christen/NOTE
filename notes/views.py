@@ -3,8 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.csrf import csrf_exempt
-from .forms import ContactForm, SigninForm, RegisterForm
+from .forms import ContactForm, SigninForm, RegisterForm, CreateBookForm
 
 import datetime
 
@@ -65,31 +64,51 @@ def auth(request):
                     print "User not valid"
             else:
             	print "Please sign in again"
+
         elif 'signUp' in request.POST and registerForm.is_bound:
             if registerForm.is_valid():
-                registerForm = registerForm.cleaned_data
-                username = registerForm['username']
-                password = registerForm['password']
-                cPassword = registerForm['confirmedPassword']
-                lastName = registerForm['lastName']
-                firstName = registerForm['firstName']
-                if password == cPassword:
-                    user = User.objects.create_user(username, registerForm['email'], password)
-                    if lastName:
-                        user.last_name = lastName
-                    if firstName:
-                        user.first_name = firstName
-                    user.save()
-                    user = authenticate(username= username, password=password)
-                    login(request, user)
-                    print "Well Done"
-                    return redirect('/accounts/profile')
+                cd = registerForm.cleaned_data
+                username = cd['username']
+                password = cd['password']
+                cPassword = cd['confirmedPassword']
+                lastName = cd['lastName']
+                firstName = cd['firstName']
+
+                user = User.objects.create_user(username, cd['email'], password)
+                """
+                try:
+                except IntegrityError:
+                    registerForm['username'].errors.append(u'Username is already taken')
+                    return render(request, 'notes/auth.html', {'registerForm': registerForm, 'signinForm' : SigninForm()})
+                """
+                if lastName:
+                    user.last_name = lastName
+                if firstName:
+                    user.first_name = firstName
+                user.save()
+                user = authenticate(username= username, password=password)
+                login(request, user)
+                print "Well Done"
+                return redirect('/accounts/profile')
+            else:
+                return render(request, 'notes/auth.html', {'registerForm': registerForm, 'signinForm' : SigninForm()})
     signinForm = SigninForm()
     registerForm = RegisterForm()
 
     return render(request, 'notes/auth.html', {'registerForm' : registerForm, 'signinForm' : signinForm}) 
  
 def createBook(request):
+    if request.method == 'POST':
+        form = CreateBookForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            title = cd['title']
+            public = cd['public']
+            print 'title', title
+            print 'public', public
+        else:
+            print 'form invalid'
+
     return render(request, 'notes/create.html')
 
 def about(request):
