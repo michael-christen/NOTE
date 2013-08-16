@@ -1,2 +1,56 @@
 {% extends 'notes/base.html' %}
+{% load staticfiles %}
 {% block title %} HOME {% endblock %}
+{% block content %} 
+<div class='container'>
+	<div class='hero-unit'>
+		<h1>A new way to take notes!</h1>
+		<p class='lead'>
+			Have you ever found yourself unable remember key concepts from a course you just took a few years ago? Or, have you found yourself re-reading the same set of notes over and over, but to no avail? Well, dontyounote.com is the answer to your problems. Sign up below.
+		</p>
+		<a class='btn btn-large btn-success' href='/authenticate'>Signup</a>
+	</div>
+	<hr>
+	<div class='row-fluid'>
+		<div class='span4'>
+			<h2>
+				Easily create notes
+			</h2>
+			<p>
+				Whle in a lecture, record notes in the normal outline form.
+			</p>
+			<p>
+				<a class='btn' href='/create'>
+					Create
+				</a>
+			</p>
+		</div>
+		<div class='span4'>
+			<h2>
+				Review notes
+			</h2>
+			<p>
+				Review your notes as well as your friends.
+			</p>
+			<p>
+				<a class='btn' href='/view'>
+					Review
+				</a>
+			</p>
+		</div>
+		<div class='span4'>
+			<h2>
+				Summarize learning
+			</h2>
+			<p>
+				Summarize your notes succintly
+			</p>
+			<p>
+				<a class='btn' href='/view'>
+					Summarize
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

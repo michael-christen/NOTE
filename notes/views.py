@@ -43,60 +43,52 @@ def signout(request):
 def auth(request):
     if request.user.is_authenticated():
         return redirect('/accounts/profile')
-    if request.method == 'POST':
+
+    fwdLink = None
+    if request.method == 'GET':
+        if 'next' in request.GET:
+            fwdLink = request.GET['next']
+
+    elif request.method == 'POST':
         signinForm = SigninForm(request.POST)
         registerForm =  RegisterForm(request.POST)
+        if 'next' in request.POST:
+            fwdLink = request.POST['next']
+
         if 'signIn' in request.POST and signinForm.is_bound:
-            print 'signInForm'
             if signinForm.is_valid():
-                signinForm = signinForm.cleaned_data
-                username = signinForm['username']
-                password = signinForm['password']
-                user = authenticate(username = username, password = password)
-            	if(user is not None):
-                    if(user.is_active):
-                        print "User is valid authenticated and verified"
-                        login(request, user)
-                        return redirect('/accounts/profile')
-                    else:
-                        print "User exists, but not active"
+                login(request, signinForm.get_user())
+                if fwdLink:
+                    return redirect(fwdLink)
                 else:
-                    print "User not valid"
+                    return redirect('/accounts/profile')
             else:
-            	print "Please sign in again"
+                return render(request, 'notes/auth.html', {
+                    'registerForm': RegisterForm(), 
+                    'signinForm' : signinForm,
+                    'next' : fwdLink
+                })
 
         elif 'signUp' in request.POST and registerForm.is_bound:
             if registerForm.is_valid():
-                cd = registerForm.cleaned_data
-                username = cd['username']
-                password = cd['password']
-                cPassword = cd['confirmedPassword']
-                lastName = cd['lastName']
-                firstName = cd['firstName']
-
-                user = User.objects.create_user(username, cd['email'], password)
-                """
-                try:
-                except IntegrityError:
-                    registerForm['username'].errors.append(u'Username is already taken')
-                    return render(request, 'notes/auth.html', {'registerForm': registerForm, 'signinForm' : SigninForm()})
-                """
-                if lastName:
-                    user.last_name = lastName
-                if firstName:
-                    user.first_name = firstName
-                user.save()
-                user = authenticate(username= username, password=password)
-                login(request, user)
-                print "Well Done"
-                return redirect('/accounts/profile')
+                login(request, registerForm.get_user)
+                if fwdLink:
+                    return redirect(fwdLink)
+                else:
+                    return redirect('/accounts/profile')
             else:
-                return render(request, 'notes/auth.html', {'registerForm': registerForm, 'signinForm' : SigninForm()})
-    signinForm = SigninForm()
-    registerForm = RegisterForm()
+                return render(request, 'notes/auth.html', {
+                    'registerForm': registerForm, 
+                    'signinForm' : SigninForm(),
+                    'next' : fwdLink
+                })
 
-    return render(request, 'notes/auth.html', {'registerForm' : registerForm, 'signinForm' : signinForm}) 
- 
+    return render(request, 'notes/auth.html', {
+        'registerForm' : RegisterForm(), 
+        'signinForm' : SigninForm(),
+        'next' : fwdLink
+    })
+
 def createBook(request):
     if request.method == 'POST':
         form = CreateBookForm(request.POST)
